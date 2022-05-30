@@ -16,14 +16,8 @@ using static ExSimpleIoc.Common.KeyResolver;
  * 
  * 
  * 
- * 继续v2版本
  * 
  * 
- * 
- * 
- * 
- * 11111111111111111111111111111111111111
- * 2222222222222222222222222222222222
  */
 
 namespace ExSimpleIoc
