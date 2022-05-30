@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace ExSimpleIoc
 {
+    //这hot-fix分支下的代码
     public class IServiceProviderImpl : IServiceProvider
     {
         private IServiceCollection _Services;
