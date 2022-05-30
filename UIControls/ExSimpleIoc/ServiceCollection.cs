@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 using static ExSimpleIoc.Common.KeyResolver;
 
 
-//这是在hot-fix分支下的代码
 namespace ExSimpleIoc
 {
     public class ServiceCollection : IServiceCollection
