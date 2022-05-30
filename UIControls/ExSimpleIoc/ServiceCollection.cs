@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using static ExSimpleIoc.Common.KeyResolver;
 
-
+//this is ExSimpleIoc core container
 namespace ExSimpleIoc
 {
     public class ServiceCollection : IServiceCollection
