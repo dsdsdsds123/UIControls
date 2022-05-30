@@ -1,0 +1,10 @@
+﻿<app:ApplicationBase x:Class="SimpleCoreProgram.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:SimpleCoreProgram"
+             xmlns:app="clr-namespace:ExSimpleIoc.AppServices;assembly=ExSimpleIoc"
+             StartupUri="Views\MainWindow.xaml">
+    <app:ApplicationBase.Resources>
+         
+    </app:ApplicationBase.Resources>
+</app:ApplicationBase>

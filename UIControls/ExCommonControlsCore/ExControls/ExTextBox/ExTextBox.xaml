@@ -1,0 +1,192 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:ExCommonControlsCore.ExControls.ExTextBox">
+
+
+    <PathGeometry x:Key="warningIcon" Figures="M514.007056 1009.348491c-273.762446 0-496.545668-222.783222-496.545668-496.545669S240.24461
+                  16.257154 514.007056 16.257154 1010.552724 238.839671 1010.552724 512.802822s-222.783222 496.545668-496.545668 
+                  496.545669z m0-266.135633c-39.539004 0-71.852607 32.112897-71.852607 71.852607 0 39.539004 32.112897 71.852607 71.852607 
+                  71.852606s71.852607-32.112897 71.852607-71.852606c-0.200706-39.73971-32.313603-71.852607-71.852607-71.852607z
+                  m0-92.324579c39.539004 0 71.852607-32.112897
+                  71.852607-71.852607V210.54018c0-39.539004-32.112897-71.852607-71.852607-71.852606s-71.852607 32.112897-71.852607 
+                  71.852606v368.495492c0 39.539004 32.313603 71.852607 71.852607 71.852607z"/>
+
+    <SolidColorBrush x:Key="TextBox.Static.Border" Color="#FFABAdB3"/>
+    <SolidColorBrush x:Key="TextBox.MouseOver.Border" Color="#FF7EB4EA"/>
+    <SolidColorBrush x:Key="TextBox.Focus.Border" Color="#FF569DE5"/>
+    <SolidColorBrush x:Key="TextBox.HasError.Border" Color="Red"/>
+
+    <Color x:Key="Color.Light.Border.Normal">#FFABAdB3</Color>
+    <Color x:Key="Color.Light.Border.MouseOver">#5CADFF</Color>
+
+    <Style TargetType="{x:Type local:ExTextBox}">
+        <Setter Property="MinHeight" Value="25"/>
+        <Setter Property="BorderBrush" Value="{StaticResource TextBox.Static.Border}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
+        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="AllowDrop" Value="true"/>
+        <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
+        <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="CornerRadius" Value="2"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Watermark" Value="请输入..."/>
+        <Setter Property="Validation.ErrorTemplate">
+            <Setter.Value>
+                <ControlTemplate>
+                    <AdornedElementPlaceholder/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:ExTextBox}">
+                    <Grid>
+                        <!--<Border x:Name="ShadowBorder" CornerRadius="{TemplateBinding CornerRadius}" Background="#FFFFFFFF"
+                                SnapsToDevicePixels="True" UseLayoutRounding="True">
+                            <Border.Effect>
+                                <DropShadowEffect BlurRadius="5" Opacity="0.2" ShadowDepth="0" Color="Transparent"/>
+                            </Border.Effect>
+                        </Border>-->
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+                            <Border x:Name="border" CornerRadius="{TemplateBinding CornerRadius}"
+                                Background="{TemplateBinding Background}"
+                                MinHeight="{TemplateBinding MinHeight}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                UseLayoutRounding="{TemplateBinding UseLayoutRounding}">
+                                <Grid>
+                                    <ScrollViewer x:Name="PART_ContentHost"
+                                              Margin="{TemplateBinding Padding}"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                              HorizontalScrollBarVisibility="Hidden"
+                                              VerticalScrollBarVisibility="{TemplateBinding VerticalScrollBarVisibility}"/>
+                                    <TextBlock Name="watermarkTxt" Text="{TemplateBinding Watermark}" Foreground="Gray" FontSize="{TemplateBinding FontSize}"
+                                               Margin="7,0,0,0" VerticalAlignment="Center" Opacity="0.4">
+                                        <TextBlock.Style>
+                                            <Style TargetType="{x:Type TextBlock}">
+                                                <Style.Triggers>
+                                                    <MultiDataTrigger>
+                                                        <MultiDataTrigger.Conditions>
+                                                            <Condition Binding="{Binding IsKeyboardFocused, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:ExTextBox}}}" Value="True" />
+                                                            <Condition Binding="{Binding Text.IsEmpty, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:ExTextBox}}}" Value="True" />
+                                                        </MultiDataTrigger.Conditions>
+                                                        <Setter Property="Visibility" Value="Collapsed" />
+                                                    </MultiDataTrigger>
+                                                    <MultiDataTrigger>
+                                                        <MultiDataTrigger.Conditions>
+                                                            <Condition Binding="{Binding IsKeyboardFocused, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:ExTextBox}}}" Value="True" />
+                                                            <Condition Binding="{Binding Text.IsEmpty, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:ExTextBox}}}" Value="False" />
+                                                        </MultiDataTrigger.Conditions>
+                                                        <Setter Property="Visibility" Value="Collapsed" />
+                                                    </MultiDataTrigger>
+                                                    <MultiDataTrigger>
+                                                        <MultiDataTrigger.Conditions>
+                                                            <Condition Binding="{Binding IsKeyboardFocused, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:ExTextBox}}}" Value="False" />
+                                                            <Condition Binding="{Binding Text.IsEmpty, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:ExTextBox}}}" Value="False" />
+                                                        </MultiDataTrigger.Conditions>
+                                                        <Setter Property="Visibility" Value="Collapsed" />
+                                                    </MultiDataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </TextBlock.Style>
+                                    </TextBlock>
+                                </Grid>
+                            </Border>
+                            
+                            <StackPanel Margin="0,3,0,3" Name="txtContainer" Visibility="Collapsed" Grid.Row="1" Orientation="Horizontal"
+                                            HorizontalAlignment="Left">
+                                <Path Margin="2,0,2,0" Stretch="Uniform" Width="12" Height="12" Fill="Red" Data="{StaticResource warningIcon}"/>
+                                <TextBlock Foreground="Red" FontSize="12"
+                                               Text="{Binding RelativeSource={RelativeSource TemplatedParent},Path=(Validation.Errors)[0].ErrorContent}"
+                                               VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                            </StackPanel>
+                        </Grid>
+
+
+                        <!--<VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal">
+                                    <Storyboard>
+                                        <ColorAnimation Duration="0:0:0.4" Storyboard.TargetName="border" Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)"
+                                                        To="{StaticResource Color.Light.Border.Normal}"/>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="MouseOver">
+                                    <Storyboard>
+                                        <ColorAnimation Duration="0:0:0.4" Storyboard.TargetName="border" Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)"
+                                                        To="{StaticResource Color.Light.Border.MouseOver}"/>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                            <VisualStateGroup x:Name="FocusStates">
+                                <VisualState x:Name="Focused">
+                                    <Storyboard>
+                                        --><!--<ColorAnimation Duration="0:0:0.2" Storyboard.TargetName="ShadowBorder" 
+                                                        Storyboard.TargetProperty="(Border.Effect).(DropShadowEffect.Color)"
+                                                        To="Brown"/>--><!--
+                                        <ColorAnimation Duration="0:0:0.4" Storyboard.TargetName="border" Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)"
+                                                        To="{StaticResource Color.Light.Border.MouseOver}"/>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="UnFoucused">
+                                    <Storyboard>
+                                        --><!--<ColorAnimation Duration="0:0:0.2" Storyboard.TargetName="ShadowBorder" 
+                                                        Storyboard.TargetProperty="(Border.Effect).(DropShadowEffect.Color)"
+                                                        To="Transparent"/>--><!--
+                                        <ColorAnimation Duration="0:0:0.4" Storyboard.TargetName="border" Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)"
+                                                        To="{StaticResource Color.Light.Border.Normal}"/>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>-->
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <DataTrigger Binding="{Binding Text.IsEmpty, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type local:ExTextBox}}}" Value="true">
+                            <Setter TargetName="watermarkTxt" Property="Visibility" Value="Collapsed"/>
+                        </DataTrigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" TargetName="border" Value="0.56"/>
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocused" Value="True">
+                            <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource TextBox.Focus.Border}"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource TextBox.MouseOver.Border}"/>
+                        </Trigger>
+                        <Trigger Property="Validation.HasError" Value="True">
+                            <Setter TargetName="txtContainer" Property="Visibility" Value="Visible"/>
+                            <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource TextBox.HasError.Border}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="MultiRow" Value="True">
+                <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+                <Setter Property="Padding" Value="1,2,0,2"/>
+                <Setter Property="TextWrapping"  Value="Wrap"/>
+                <Setter Property="HorizontalScrollBarVisibility" Value="Disabled"/>
+            </Trigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsInactiveSelectionHighlightEnabled" Value="true"/>
+                    <Condition Property="IsSelectionActive" Value="false"/>
+                </MultiTrigger.Conditions>
+                <Setter Property="SelectionBrush" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}"/>
+            </MultiTrigger>
+        </Style.Triggers>
+    </Style>
+
+
+</ResourceDictionary>

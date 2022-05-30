@@ -1,0 +1,37 @@
+﻿<exwin:ExTemplatedMainWindowControl x:Class="ExCommonControlsCorePreview.Views.TemplatedWindowShow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ExCommonControlsCorePreview.Views"
+        mc:Ignorable="d"
+        xmlns:exc="clr-namespace:ExCommonControlsCore.ExControls;assembly=ExCommonControlsCore"
+        HintMessages="{Binding Messages}"
+        Menus="{Binding Menus}"
+        xmlns:exbtns="clr-namespace:ExCommonControlsCore.ExControls.ExButtons;assembly=ExCommonControlsCore"
+        xmlns:exwin="clr-namespace:ExCommonControlsCore.ExControls.ExWindows;assembly=ExCommonControlsCore"
+        Title="{Binding Title}" Height="700" Width="1000">
+
+    <exwin:ExTemplatedMainWindowControl.RightShowContent>
+        <TextBlock Text="数据内容展示区" FontSize="22" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+    </exwin:ExTemplatedMainWindowControl.RightShowContent>
+    <exwin:ExTemplatedMainWindowControl.StatusBarContent>
+        <TextBlock Text="状态栏内容展示区" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+    </exwin:ExTemplatedMainWindowControl.StatusBarContent>
+    <Grid>
+        <Grid.Resources>
+            <FontFamily x:Key="FontFamily">pack://application:,,,/ExCommonControlsCore;component/Assets/Fonts/#iconfont</FontFamily>
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <StackPanel Margin="10,0,10,0" Orientation="Horizontal">
+            <exbtns:ExBigIconButton  FontFamily="{StaticResource FontFamily}" Margin="5,0,5,0" Content="开启相机" Tag="&#xe60b;"/>
+            <exbtns:ExBigIconButton FontFamily="{StaticResource FontFamily}" Margin="5,0,5,0" Content="停止相机" Tag="&#xeae1;"/>
+            <exbtns:ExBigIconButton FontFamily="{StaticResource FontFamily}" Margin="5,0,5,0" Content="标定" Tag="&#xe68c;"/>
+            <exbtns:ExBigIconButton FontFamily="{StaticResource FontFamily}" Margin="5,0,5,0" Content="拍照" Tag="&#xe793;"/>
+            <exbtns:ExBigIconButton FontFamily="{StaticResource FontFamily}" Width="100" Margin="5,0,5,0" Content="执行一次测量" Tag="&#xe609;"/>
+        </StackPanel>
+    </Grid>
+</exwin:ExTemplatedMainWindowControl>

@@ -1,0 +1,199 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+                   xmlns:converters="clr-namespace:ExCommonControlsCore.ExConverters"
+                    xmlns:local="clr-namespace:ExCommonControlsCore.ExControls.ExWindows">
+
+    <local:WindowStateNormalToCollapsedConverter x:Key="WindowStateNormalToCollapsedConverter"/>
+    <local:WindowStateNormalToVisibilityConverter x:Key="WindowStateNormalToVisibilityConverter"/>
+
+    <Style x:Key="MaximizedStyle" TargetType="{x:Type Button}">
+        <Setter Property="Width" Value="40"/>
+        <Setter Property="Height" Value="40"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid x:Name="bg" Width="40" Background="Transparent">
+                        <Path Data="M128 160v704h768v-704H128z m722.56 657.984H174.72V206.08h675.84v611.904z" 
+                              Fill="{TemplateBinding Background}" Width="11" SnapsToDevicePixels="True"
+                              UseLayoutRounding="True" Stretch="Uniform" 
+                              HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="bg" Property="Background" Value="#22000000" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <SolidColorBrush x:Key="CloseMouseOverBgColor" Color="#E74450" />
+
+    <Style x:Key="RestoreStyle" TargetType="{x:Type Button}">
+        <Setter Property="Width" Value="40"/>
+        <Setter Property="Height" Value="40"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid x:Name="bg" Width="40" Background="Transparent">
+                        <Path x:Name="PathMin" SnapsToDevicePixels="True"
+                              Width="12" UseLayoutRounding="True"
+                              Data="M896 704.96h-128v-448H320V128h576c20.672 0 0 0 0 0v576.96z m-192 192H128l-0.384-577.92L704 320v576.96z m-448-832v192H64l0.32 702.08L768 960v-192l185.344-1.344L960 64.96H256z" 
+                              Stretch="Uniform" Fill="{TemplateBinding Background}" 
+                              HorizontalAlignment="Center" 
+                              VerticalAlignment="Center" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="bg" Property="Background" Value="#22000000" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <Style x:Key="MinimizedStyle" TargetType="{x:Type Button}">
+        <Setter Property="Width" Value="40"/>
+        <Setter Property="Height" Value="40"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid x:Name="bg" Width="40" Background="Transparent">
+                        <Path x:Name="PathMin" SnapsToDevicePixels="True"
+                              UseLayoutRounding="True"
+                              Data="M0,9 13,9 13,10 0,10Z" Height="1"
+                              Fill="{TemplateBinding Background}" Stretch="Uniform"
+                              HorizontalAlignment="Center"
+                              VerticalAlignment="Center" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="bg" Property="Background" Value="#22000000" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <Style x:Key="CloseStyle" TargetType="{x:Type Button}">
+        <Setter Property="Width" Value="40"/>
+        <Setter Property="Height" Value="40"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid x:Name="bg" Width="40" Background="Transparent">
+                        <Path x:Name="PathMin" SnapsToDevicePixels="True"
+                              Width="11" UseLayoutRounding="True"
+                              Data="M548.178991 512 815.105343 245.073648c9.990538-9.990538 9.990538-26.188452 0-36.178991-9.991562-9.990538-26.188452-9.990538-36.178991 0L512 475.819986 245.073648 208.894657c-9.991562-9.990538-26.188452-9.990538-36.178991 0-9.990538 9.990538-9.990538 26.188452 0 36.178991l266.926352 266.926352L208.894657 778.926352c-9.990538 9.991562-9.990538 26.188452 0 36.178991 4.995781 4.995781 11.542894 7.492648 18.090007 7.492648s13.094226-2.496867 18.090007-7.492648l266.926352-266.926352 266.926352 266.926352c4.995781 4.995781 11.541871 7.492648 18.090007 7.492648s13.094226-2.496867 18.090007-7.492648c9.990538-9.991562 9.990538-26.188452 0-36.178991L548.178991 512z"
+                              Fill="{TemplateBinding Background}" Stretch="Uniform"
+                              HorizontalAlignment="Center"
+                              VerticalAlignment="Center" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="bg" Property="Background" Value="{StaticResource CloseMouseOverBgColor}" />
+                            <Setter TargetName="PathMin" Property="Fill" Value="#FFFFFF" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+
+    <Style  TargetType="{x:Type local:ExWindowUseChrome}">
+        <Setter Property="WindowChrome.WindowChrome">
+            <Setter.Value>
+                <WindowChrome UseAeroCaptionButtons="False" GlassFrameThickness="-1"  ResizeBorderThickness="4" CaptionHeight="50"/>
+                <!--<WindowChrome GlassFrameThickness="-1" CaptionHeight="50"/>-->
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Background" Value="#303030"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:ExWindowUseChrome}">
+                    <Border BorderBrush="Transparent" BorderThickness="1" CornerRadius="0" >
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="20" Direction="270" Color="#FF290F23" />
+                        </Border.Effect>
+                        <DockPanel Background="{TemplateBinding Background}" LastChildFill="True">
+                            <Grid Height="auto" DockPanel.Dock="Top" Background="Transparent">
+                                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                    <ContentPresenter Content="{TemplateBinding Header}"/>
+                                </Grid>
+                                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                                    <StackPanel Name="sp1" Orientation="Horizontal" Margin="7,0,0,0">
+                                        <Image Name="img" Stretch="Uniform" Width="{TemplateBinding WindowIconSize}" Height="{TemplateBinding WindowIconSize}"
+                                                 Source="{TemplateBinding WindowIcon}" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                        </Image>
+                                        <TextBlock Name="txt"  Margin="10,10,0,0" Text="{TemplateBinding Title}" FontSize="{TemplateBinding TitleFontSize}"  
+                                                    Foreground="{TemplateBinding TitleForeground}"  VerticalAlignment="Top">
+                                        </TextBlock>
+                                    </StackPanel>
+                                </Grid>
+                                <StackPanel Name="toolStack" Margin="0,0,7,0" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top">
+                                    <Button Style="{StaticResource MinimizedStyle}" WindowChrome.IsHitTestVisibleInChrome="True" VerticalAlignment="Center">
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="Click">
+                                                <i:ChangePropertyAction TargetObject="{Binding RelativeSource={RelativeSource AncestorType=Window,Mode=FindAncestor}}" PropertyName="WindowState" Value="Minimized"/>
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+                                    </Button>
+                                    <Button Style="{StaticResource MaximizedStyle}" Visibility="{Binding RelativeSource={RelativeSource AncestorType=Window,Mode=FindAncestor},Path=WindowState,Converter={StaticResource WindowStateNormalToVisibilityConverter}}" WindowChrome.IsHitTestVisibleInChrome="True" VerticalAlignment="Center">
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="Click">
+                                                <i:ChangePropertyAction TargetObject="{Binding RelativeSource={RelativeSource AncestorType=Window,Mode=FindAncestor}}" PropertyName="WindowState" Value="Maximized"/>
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+                                    </Button>
+                                    <Button Style="{StaticResource RestoreStyle}"  Visibility="{Binding RelativeSource={RelativeSource AncestorType=Window,Mode=FindAncestor},Path=WindowState,Converter={StaticResource WindowStateNormalToCollapsedConverter}}" WindowChrome.IsHitTestVisibleInChrome="True" VerticalAlignment="Center">
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="Click">
+                                                <i:ChangePropertyAction TargetObject="{Binding RelativeSource={RelativeSource AncestorType=Window,Mode=FindAncestor}}" PropertyName="WindowState" Value="Normal"/>
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+                                    </Button>
+                                    <Button Style="{StaticResource CloseStyle}" WindowChrome.IsHitTestVisibleInChrome="True" VerticalAlignment="Center">
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="Click">
+                                                <i:CallMethodAction TargetObject="{Binding RelativeSource={RelativeSource AncestorType=Window,Mode=FindAncestor}}" MethodName="Close"/>
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+                                    </Button>
+                                </StackPanel>
+                            </Grid>
+                            <Grid Grid.Row="1" Background="{TemplateBinding Background}">
+                                <ContentPresenter x:Name="content" />
+                            </Grid>
+                        </DockPanel>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="WindowState" Value="Maximized">
+                            <Setter TargetName="toolStack" Property="Margin" Value="0,7,10,0"/>
+                            <Setter TargetName="sp1" Property="Margin" Value="10,10,0,0"/>
+                            <Setter TargetName="content" Property="Margin" Value="8,0,8,0"/>
+                        </Trigger>
+                        <Trigger Property="WindowIcon" Value="{x:Null}">
+                            <Setter TargetName="img" Property="Visibility" Value="Collapsed"/>
+                        </Trigger>
+                        <Trigger Property="Title" Value="">
+                            <Setter TargetName="txt" Property="Visibility" Value="Collapsed"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+
+
+
+</ResourceDictionary>

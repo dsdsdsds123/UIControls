@@ -1,0 +1,16 @@
+﻿<exwin:ExWindow x:Class="ExCommonControlsCorePreview.Views.ExWindowShow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ExCommonControlsCorePreview.Views"
+        mc:Ignorable="d"
+                xmlns:exc="clr-namespace:ExCommonControlsCore.ExControls;assembly=ExCommonControlsCore"
+                CaptionHeight="60"
+                IsUseAnimation="False"
+        xmlns:exwin="clr-namespace:ExCommonControlsCore.ExControls.ExWindows;assembly=ExCommonControlsCore"
+        Title="ExWindowShow" Height="450" Width="800">
+    <Grid>
+        <!--<exc:MenuContainerV1 HorizontalAlignment="Left" Menus="{Binding Menus}"/>-->
+    </Grid>
+</exwin:ExWindow>

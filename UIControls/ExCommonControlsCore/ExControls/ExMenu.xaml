@@ -1,0 +1,238 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:convereters="clr-namespace:ExCommonControlsCore.ExConverters"
+                    xmlns:local="clr-namespace:ExCommonControlsCore.ExControls">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/ExCommonControlsCore;component/Themes/ThemeColorNew.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+    <convereters:MenuWidthConverter x:Key="MenuWidthConverter"/>
+
+
+    <SolidColorBrush x:Key="MenuItemMouseOverBackground" Color="#33bdbdbd"/>
+    <SolidColorBrush x:Key="MenuItemContainerBackground" Color="#FFF2F2F2"/>
+    <SolidColorBrush x:Key="MenuItemHighLightBackground" Color="#FFB2E1D8"/>
+    <SolidColorBrush x:Key="MenuItemForeground" Color="#FF898989"/>
+
+    <GeometryGroup x:Key="MenuJiantou">
+        <PathGeometry Figures="M325.456896 862.27968"/>
+        <PathGeometry Figures="M882.05824 862.27968"/>
+        <PathGeometry Figures="M236.027904 877.161472"/>
+        <PathGeometry Figures="M960.132096 877.161472"/>
+        <PathGeometry Figures="M154.215424 876.16"/>
+        <PathGeometry Figures="M816.575488 509.791232 209.619968 63.070208 209.619968 957.022208Z"/>
+        <PathGeometry Figures="M871.471104 876.16"/>
+    </GeometryGroup>
+
+    <PathGeometry x:Key="CheckedIcon" Figures="M431.56 832.334c-20.505 0-40.192-8.093-54.833-22.734L232.181 
+                  665.055l-73.49-70.821c-19.088-18.396-19.651-48.782-1.255-67.871s48.782-19.649 67.871-1.256l74.444 
+                  71.752 129.435 129.436 363.619-514.333c15.303-21.647 45.258-26.79 66.903-11.485 21.646 15.304 26.789 
+                  45.257 11.485 66.903L494.981 799.523c-13.239 18.726-33.936 30.582-56.786 32.529a78.116 78.116 0 0 1-6.635 
+                  0.282z"></PathGeometry>
+
+
+
+   
+
+    <!-- 顶级菜单头 -->
+    <ControlTemplate x:Key="顶级菜单头" TargetType="{x:Type local:ExMenuItem}">
+        <Border x:Name="Border" MinWidth="64" Background="Transparent" VerticalAlignment="Center" Height="25">
+            <Grid>
+                <!-- 边框 -->
+                <!--<Border x:Name="Frame" BorderThickness="1,1,1,0" BorderBrush="Transparent"/>-->
+                <!-- 文本 -->
+                <ContentPresenter x:Name="Text" ContentSource="Header" HorizontalAlignment="Center"  VerticalAlignment="Center" Margin="10,0" RecognizesAccessKey="True"/>
+                <!-- 弹出框 -->
+                <Popup x:Name="PART_Popup" Placement="Bottom" IsOpen="{TemplateBinding IsSubmenuOpen}" PopupAnimation="None" AllowsTransparency="True">
+                    <!-- 弹出框外框 -->
+                    <Border x:Name="PopupBorder" Background="{StaticResource MenuItemContainerBackground}" Padding="2,1" BorderBrush="Transparent" BorderThickness="0">
+                        <Grid>
+                            <!-- 遮盖线 -->
+                            <!--
+                            <Grid Background="#3B4453" Height="1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="-2,-2"
+                                  Width="{Binding ElementName=Border, Path=ActualWidth, Converter={StaticResource Convert01}}"/>-->
+                            <!-- 菜单项占位标记 -->
+                            <ItemsPresenter Grid.IsSharedSizeScope="True"/>
+                        </Grid>
+                    </Border>
+                </Popup>
+            </Grid>
+        </Border>
+        <!-- 触发器 -->
+        <ControlTemplate.Triggers>
+            <!-- 鼠标悬停 -->
+            <Trigger Property="IsMouseOver" Value="true">
+                <Setter TargetName="Border" Property="Background" Value="{StaticResource MenuItemMouseOverBackground}"/>
+            </Trigger>
+            <!-- 子菜单展开 -->
+            <Trigger Property="IsSubmenuOpen" Value="true">
+                <Setter TargetName="Border" Property="Background" Value="{StaticResource MenuItemMouseOverBackground}"/>
+                <!--<Setter TargetName="Frame" Property="BorderBrush" Value="#e0e0e0"/>-->
+            </Trigger>
+            <!-- 禁用 -->
+            <Trigger Property="IsEnabled" Value="false">
+                <Setter TargetName="Text" Property="Opacity" Value="0.2"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <!-- 顶级菜单项 -->
+    <ControlTemplate x:Key="顶级菜单项" TargetType="{x:Type local:ExMenuItem}">
+        <Border x:Name="Border" MinWidth="64" Background="Transparent" VerticalAlignment="Center" Height="25">
+            <ContentPresenter   ContentSource="Header" HorizontalAlignment="Center" 
+                              VerticalAlignment="Center" Margin="10,0" RecognizesAccessKey="True"/>
+        </Border>
+        <!-- 触发器 -->
+        <ControlTemplate.Triggers>
+            <!-- 鼠标悬停 -->
+            <Trigger Property="IsMouseOver" Value="true">
+                <Setter TargetName="Border" Property="Background" Value="{StaticResource MenuItemMouseOverBackground}"/>
+            </Trigger>
+            <!-- 鼠标按下 -->
+            <Trigger Property="IsPressed" Value="true">
+                <Setter TargetName="Border" Property="Background" Value="{StaticResource MenuItemMouseOverBackground}"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+
+
+    <!-- 子级菜单头 -->
+    <ControlTemplate x:Key="子级菜单头" TargetType="{x:Type local:ExMenuItem}">
+        <!-- 外观 -->
+        <Border x:Name="Border" Height="23" Background="Transparent" Margin="0,1">
+            <Grid x:Name="MainGrid" Margin="2,0,0,0">
+                <!-- 分三列，分别放置图标、文本、箭头 -->
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="23"/>
+                    <ColumnDefinition Width="auto" SharedSizeGroup="MenuText"/>
+                    <ColumnDefinition Width="23" SharedSizeGroup="Shortcut"/>
+                </Grid.ColumnDefinitions>
+                <!-- 图标 -->
+                <ContentPresenter x:Name="Icon" ContentSource="Icon" HorizontalAlignment="Center" VerticalAlignment="Center" Width="12" Height="12"/>
+                <!-- 文本 -->
+                <ContentPresenter x:Name="HeaderHost" 
+                                  ContentSource="Header" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="1" Margin="5,0,5,0" RecognizesAccessKey="True"/>
+                <!-- 箭头 -->
+                <Path Opacity="0.5" Width="12" Height="12" Stretch="Uniform" Data="{StaticResource MenuJiantou}" Fill="Gray"
+                       Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,1,0"/>
+                <!-- 弹出框 -->
+                <Popup x:Name="PART_Popup" Placement="Right" IsOpen="{TemplateBinding IsSubmenuOpen}" AllowsTransparency="True" PopupAnimation="None"
+                       HorizontalOffset="2" VerticalOffset="-3">
+                    <Border x:Name="PopupBorder" Background="{StaticResource MenuItemContainerBackground}" Padding="0" BorderBrush="Transparent" BorderThickness="0">
+                        <!-- 菜单项占位标记 -->
+                        <ItemsPresenter Grid.IsSharedSizeScope="True"/>
+                    </Border>
+                </Popup>
+            </Grid>
+        </Border>
+        <!-- 触发器 -->
+        <ControlTemplate.Triggers>
+            <!-- 高亮 -->
+            <Trigger Property="IsHighlighted" Value="true">
+                <Setter TargetName="Border" Property="Background" Value="{StaticResource MenuItemHighLightBackground}"/>
+            </Trigger>
+            <!-- 禁用 -->
+            <Trigger Property="IsEnabled" Value="false">
+                <Setter TargetName="MainGrid" Property="Opacity" Value="0.2"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <!-- 子级菜单项 -->
+    <ControlTemplate x:Key="子级菜单项" TargetType="{x:Type local:ExMenuItem}">
+        <Border x:Name="Border" Height="23" Background="Transparent" Margin="0,1">
+            <Grid x:Name="MainGrid" Margin="2,0,0,0">
+                <Grid.ColumnDefinitions>
+                    <!-- 图标 -->
+                    <ColumnDefinition Width="23"/>
+                    <!-- 文本 -->
+                    <ColumnDefinition Width="auto" SharedSizeGroup="MenuText"/>
+                    <!-- 快捷键 -->
+                    <ColumnDefinition Width="auto" MaxWidth="200" SharedSizeGroup="Shortcut"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- 图标 -->
+                <ContentPresenter x:Name="Icon" ContentSource="Icon" HorizontalAlignment="Center" VerticalAlignment="Center" Width="12" Height="12"/>
+
+                <!-- 文本 -->
+                <ContentPresenter 
+                    x:Name="HeaderHost" ContentSource="Header" HorizontalAlignment="Left" VerticalAlignment="Center" 
+                    Grid.Column="1" Margin="4,0,20,0" RecognizesAccessKey="True"/>
+                <!-- 快捷键 -->
+                <TextBlock x:Name="InputGestureText" Text="{TemplateBinding InputGestureText}" HorizontalAlignment="Left"
+                           VerticalAlignment="Center" Grid.Column="2" Margin="0,0,5,0"/>
+            </Grid>
+        </Border>
+        <ControlTemplate.Triggers>
+            <!-- 高亮 -->
+            <Trigger Property="IsHighlighted" Value="True">
+                <Setter TargetName="Border" Property="Background" Value="{StaticResource MenuItemHighLightBackground}"/>
+            </Trigger>
+            <!-- 禁用 -->
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter TargetName="MainGrid" Property="Opacity" Value="0.2"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <!-- 菜单分隔条 -->
+    <Style x:Key="{x:Static MenuItem.SeparatorStyleKey}" TargetType="{x:Type local:ExSeparator}">
+        <!-- 模版 -->
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Separator">
+                    <Grid Background="#e0e0e0" Height="1" Margin="25,1,0,1"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- 菜单样式 -->
+    <Style TargetType="{x:Type local:ExMenuItem}">
+        <!-- 字体、字号 -->
+        <!--<Setter Property="FontFamily" Value="NSimSun"/>-->
+        <Setter Property="FontFamily" Value="微软雅黑"/>
+
+        <Setter Property="FontSize" Value="12"/>
+        <!-- 前景色 -->
+        <Setter Property="Foreground" Value="{StaticResource MenuItemForeground}"/>
+        <!-- 根据“Role”切换模板 -->
+        <Style.Triggers>
+            <!-- 顶级菜单头 -->
+            <Trigger Property="Role" Value="TopLevelHeader">
+                <Setter Property="Template" Value="{StaticResource 顶级菜单头}"/>
+            </Trigger>
+            <!-- 顶级菜单项 -->
+            <Trigger Property="Role" Value="TopLevelItem">
+                <Setter Property="Template" Value="{StaticResource 顶级菜单项}"/>
+            </Trigger>
+            <!-- 子级菜单项 -->
+            <Trigger Property="Role" Value="SubmenuHeader">
+                <Setter Property="Template" Value="{StaticResource 子级菜单头}"/>
+            </Trigger>
+            <!-- 子级菜单项 -->
+            <Trigger Property="Role" Value="SubmenuItem">
+                <Setter Property="Template" Value="{StaticResource 子级菜单项}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style TargetType="{x:Type local:ExMenu}">
+        <Setter Property="Background" Value="Transparent"/>
+        <!-- 模版 -->
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Menu">
+                    <Border Background="Transparent" Height="25" VerticalAlignment="Top">
+                        <!-- 菜单项占位标记 -->
+                        <ItemsPresenter/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+</ResourceDictionary>

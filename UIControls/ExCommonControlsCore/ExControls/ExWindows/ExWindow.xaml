@@ -1,0 +1,393 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+                   xmlns:converters="clr-namespace:ExCommonControlsCore.ExConverters"
+                    xmlns:local="clr-namespace:ExCommonControlsCore.ExControls.ExWindows">
+
+    <converters:InverseVisibilityConverter x:Key="InverseVisibilityConverter"/>
+
+
+
+    <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+
+    <SolidColorBrush x:Key="StrokeColor" Color="#FFFFFF" />
+    <SolidColorBrush x:Key="MouseOverBgColor" Color="#20E81023" />
+    <!--关闭按钮背景色-->
+    <SolidColorBrush x:Key="CloseMouseOverBgColor" Color="#E74450" />
+    <SolidColorBrush x:Key="Button_Default_Fill" Color="#5E5E5E" />
+    <!--窗体标题栏背景色-->
+    <SolidColorBrush x:Key="Window_Title_Background" Color="#21A7ED" />
+    <SolidColorBrush x:Key="Window_Button_Over_Background" Color="#A021A7ED" />
+
+    <PathGeometry x:Key="Icon_Max" Figures="M4,4L20,4 20,20 4,20 4,4 M6,8L6,18 18,18 18,8 6,8z" />
+    <!--菜单图标-->
+    <PathGeometry x:Key="Icon_ShowMore" Figures="M934.48936 203.517183 89.511663 203.517183c-14.813381 0-26.824949-11.998265-26.824949-26.824949s12.010545-26.824949 26.824949-26.824949l844.977697 0c14.813381 0 26.824949 11.998265 26.824949 26.824949S949.302741 203.517183 934.48936 203.517183zM934.48936 538.824949 89.511663 538.824949c-14.813381 0-26.824949-11.997242-26.824949-26.824949 0-14.826684 12.010545-26.824949 26.824949-26.824949l844.977697 0c14.813381 0 26.824949 11.998265 26.824949 26.824949C961.313286 526.826684 949.302741 538.824949 934.48936 538.824949zM934.48936 874.132714 89.511663 874.132714c-14.813381 0-26.824949-11.997242-26.824949-26.824949s12.010545-26.824949 26.824949-26.824949l844.977697 0c14.813381 0 26.824949 11.997242 26.824949 26.824949S949.302741 874.132714 934.48936 874.132714z" />
+
+    <!--最大化按钮样式-->
+    <Style x:Key="MaximizedStyle" TargetType="{x:Type Button}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid x:Name="bg" Width="40" Background="Transparent">
+                        <Path Data="M128 160v704h768v-704H128z m722.56 657.984H174.72V206.08h675.84v611.904z" 
+                              Fill="{TemplateBinding Background}" Width="11" SnapsToDevicePixels="True"
+                              UseLayoutRounding="True" Stretch="Uniform" 
+                              HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="bg" Property="Background" Value="#22000000" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <!--恢复按钮样式-->
+    <Style x:Key="RestoreStyle" TargetType="{x:Type Button}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid x:Name="bg" Width="40" Background="Transparent">
+                        <Path x:Name="PathMin" SnapsToDevicePixels="True"
+                              Width="12" UseLayoutRounding="True"
+                              Data="M896 704.96h-128v-448H320V128h576c20.672 0 0 0 0 0v576.96z m-192 192H128l-0.384-577.92L704 320v576.96z m-448-832v192H64l0.32 702.08L768 960v-192l185.344-1.344L960 64.96H256z" 
+                              Stretch="Uniform" Fill="{TemplateBinding Background}" 
+                              HorizontalAlignment="Center" 
+                              VerticalAlignment="Center" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="bg" Property="Background" Value="#22000000" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--最小化按钮样式-->
+    <Style x:Key="MinimizedStyle" TargetType="{x:Type Button}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid x:Name="bg" Width="40" Background="Transparent">
+                        <Path x:Name="PathMin" SnapsToDevicePixels="True"
+                              UseLayoutRounding="True"
+                              Data="M0,9 13,9 13,10 0,10Z" Height="1"
+                              Fill="{TemplateBinding Background}" Stretch="Uniform"
+                              HorizontalAlignment="Center"
+                              VerticalAlignment="Center" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="bg" Property="Background" Value="#22000000" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+
+    <!--关闭按钮样式-->
+    <Style x:Key="CloseStyle" TargetType="{x:Type Button}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid x:Name="bg" Width="40" Background="Transparent">
+                        <Path x:Name="PathMin" SnapsToDevicePixels="True"
+                              Width="11" UseLayoutRounding="True"
+                              Data="M548.178991 512 815.105343 245.073648c9.990538-9.990538 9.990538-26.188452 0-36.178991-9.991562-9.990538-26.188452-9.990538-36.178991 0L512 475.819986 245.073648 208.894657c-9.991562-9.990538-26.188452-9.990538-36.178991 0-9.990538 9.990538-9.990538 26.188452 0 36.178991l266.926352 266.926352L208.894657 778.926352c-9.990538 9.991562-9.990538 26.188452 0 36.178991 4.995781 4.995781 11.542894 7.492648 18.090007 7.492648s13.094226-2.496867 18.090007-7.492648l266.926352-266.926352 266.926352 266.926352c4.995781 4.995781 11.541871 7.492648 18.090007 7.492648s13.094226-2.496867 18.090007-7.492648c9.990538-9.991562 9.990538-26.188452 0-36.178991L548.178991 512z"
+                              Fill="{TemplateBinding Background}" Stretch="Uniform"
+                              HorizontalAlignment="Center"
+                              VerticalAlignment="Center" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="bg" Property="Background" Value="{StaticResource CloseMouseOverBgColor}" />
+                            <Setter TargetName="PathMin" Property="Fill" Value="#FFFFFF" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--菜单按钮样式-->
+    <Style x:Key="MoreStyle" TargetType="{x:Type Button}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid x:Name="bg" Width="40" Background="Transparent">
+                        <Path x:Name="PathMin" SnapsToDevicePixels="True"
+                              Width="12" UseLayoutRounding="True"
+                              Data="{StaticResource Icon_ShowMore}"
+                              Fill="{StaticResource StrokeColor}" Stretch="Uniform"
+                              HorizontalAlignment="Center"
+                              VerticalAlignment="Center" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="bg" Property="Background" Value="{StaticResource MouseOverBgColor}" />
+                            <Setter TargetName="PathMin" Property="Stroke" Value="#FFFFFF" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+
+
+    <Storyboard x:Key="LoadedBounce">
+        <DoubleAnimation Storyboard.TargetName="gridRoot"
+                        Storyboard.TargetProperty="RenderTransform.Children[0].ScaleX"
+                        From="0.2" To="0.5" Duration="0:0:0.4" >
+        </DoubleAnimation>
+        <DoubleAnimation Storyboard.TargetName="gridRoot"
+                        Storyboard.TargetProperty="RenderTransform.Children[0].ScaleY"
+                        From="0.2" To="0.5" Duration="0:0:0.4" >
+        </DoubleAnimation>
+        <DoubleAnimation Storyboard.TargetName="gridRoot"
+                        Storyboard.TargetProperty="RenderTransform.Children[0].ScaleX"
+                          From="0.5" To="1" Duration="0:0:0.4" BeginTime="0:0:0.4" >
+        </DoubleAnimation>
+        <DoubleAnimation Storyboard.TargetName="gridRoot"
+                        Storyboard.TargetProperty="RenderTransform.Children[0].ScaleY"
+                         From="0.5" To="1" Duration="0:0:0.4" BeginTime="0:0:0.4">
+        </DoubleAnimation>
+    </Storyboard>
+
+    <Storyboard x:Key="LoadedRotatePositive">
+        <DoubleAnimation Storyboard.TargetName="gridRoot"
+                        Storyboard.TargetProperty="Opacity"
+                        From="0.2" To="1" Duration="0:0:1.2">
+        </DoubleAnimation>
+        <DoubleAnimation Storyboard.TargetName="gridRoot"
+                        Storyboard.TargetProperty="RenderTransform.Children[1].Angle"
+                        From="-90" To="0" Duration="0:0:1" >
+        </DoubleAnimation>
+        <DoubleAnimation Storyboard.TargetName="gridRoot"
+                        Storyboard.TargetProperty="RenderTransform.Children[0].ScaleX"
+                        From="0" To="1" Duration="0:0:1" 
+                        AccelerationRatio="1">
+        </DoubleAnimation>
+        <DoubleAnimation Storyboard.TargetName="gridRoot"
+                        Storyboard.TargetProperty="RenderTransform.Children[0].ScaleY"
+                        From="0" To="1" Duration="0:0:1" 
+                        AccelerationRatio="1">
+        </DoubleAnimation>
+        <!--<DoubleAnimation Storyboard.TargetName="gridRoot"
+                        Storyboard.TargetProperty="RenderTransform.Children[0].ScaleX"
+                        To="0.98" BeginTime="0:0:2" Duration="0:0:0.05" 
+                        DecelerationRatio="1">
+        </DoubleAnimation>
+        <DoubleAnimation Storyboard.TargetName="gridRoot"
+                        Storyboard.TargetProperty="RenderTransform.Children[0].ScaleY"
+                        To="0.98" BeginTime="0:0:2" Duration="0:0:0.05" 
+                        DecelerationRatio="1">
+        </DoubleAnimation>-->
+        <DoubleAnimation Storyboard.TargetName="gridRoot"
+                        Storyboard.TargetProperty="RenderTransform.Children[0].ScaleX"
+                        To="1" BeginTime="0:0:2.05" Duration="0:0:0.2"  
+                        AccelerationRatio="1">
+        </DoubleAnimation>
+        <DoubleAnimation Storyboard.TargetName="gridRoot"              
+                        Storyboard.TargetProperty="RenderTransform.Children[0].ScaleY"
+                        To="1" BeginTime="0:0:2.05" Duration="0:0:0.2" 
+                        AccelerationRatio="1">
+        </DoubleAnimation>
+    </Storyboard>
+
+    <Storyboard x:Key="rotateCloseStoryboard">
+        <DoubleAnimation Storyboard.TargetName="gridRoot" 
+                      Storyboard.TargetProperty="RenderTransform.Children[1].Angle"
+                      To="360" Duration="0:0:1" >
+        </DoubleAnimation>
+        <DoubleAnimation Storyboard.TargetName="gridRoot" 
+                      Storyboard.TargetProperty="Opacity"
+                      To="0" Duration="0:0:2">
+        </DoubleAnimation>
+        <DoubleAnimation Storyboard.TargetName="gridRoot" 
+                      Storyboard.TargetProperty="RenderTransform.Children[0].ScaleX"
+                      To="0" Duration="0:0:1" AccelerationRatio="1">
+        </DoubleAnimation>
+        <DoubleAnimation Storyboard.TargetName="gridRoot"
+                      Storyboard.TargetProperty="RenderTransform.Children[0].ScaleY"
+                      To="0" Duration="0:0:1" AccelerationRatio="1">
+        </DoubleAnimation>
+    </Storyboard>
+
+
+    <Storyboard x:Key="LoadedRotateNegative">
+        <DoubleAnimation Storyboard.TargetName="gridRoot"
+                        Storyboard.TargetProperty="Opacity"
+                        From="0" To="1" Duration="0:0:0.5">
+        </DoubleAnimation>
+        <DoubleAnimation Storyboard.TargetName="gridRoot"
+                        Storyboard.TargetProperty="RenderTransform.Children[1].Angle"
+                        From="180" To="0" Duration="0:0:0.5" >
+        </DoubleAnimation>
+        <DoubleAnimation Storyboard.TargetName="gridRoot"
+                        Storyboard.TargetProperty="RenderTransform.Children[0].ScaleX"
+                        From="0.2" To="1" Duration="0:0:0.5" 
+                        AccelerationRatio="1">
+        </DoubleAnimation>
+        <DoubleAnimation Storyboard.TargetName="gridRoot"
+                        Storyboard.TargetProperty="RenderTransform.Children[0].ScaleY"
+                        From="0.2" To="1" Duration="0:0:0.5" 
+                        AccelerationRatio="1">
+        </DoubleAnimation>
+    </Storyboard>
+
+
+
+
+    <Style TargetType="{x:Type local:ExWindow}">
+        <Setter Property="FontFamily" Value="Consolas, Microsoft YaHei" />
+        <Setter Property="FontFamily" Value="Microsoft YaHei" />
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="ResizeMode" Value="CanMinimize" />
+        <Setter Property="Width" Value="300" />
+        <Setter Property="TitleFontSize" Value="13"/>
+        <Setter Property="Iconsize" Value="16"/>
+        <Setter Property="MinHeight" Value="200" />
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" />
+        <Setter Property="Background" Value="{StaticResource Window_Title_Background}" />
+        <Setter Property="TitleBackground" Value="{StaticResource Window_Title_Background}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:ExWindow}">
+                    <Grid Name="gridRoot" Margin="20" RenderTransformOrigin="0.5,0.5">
+                        <Grid.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <RotateTransform/>
+                            </TransformGroup>
+                        </Grid.RenderTransform>
+                        <Border Background="#FFFFFF" SnapsToDevicePixels="True" UseLayoutRounding="True">
+                            <Border.Effect>
+                                <DropShadowEffect BlurRadius="10" Opacity="0.4" ShadowDepth="0" Color="Brown" />
+                            </Border.Effect>
+                        </Border>
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding TitleBackground}" BorderThickness="1,0,1,1"
+                                Padding="{TemplateBinding Margin}" Margin="0,0,0,0"
+                                SnapsToDevicePixels="True" CornerRadius="0"
+                                UseLayoutRounding="True">
+                            <Grid Background="White">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+
+                                <Grid x:Name="PART_TitleBar" Background="{TemplateBinding TitleBackground}"
+                                      Height="{TemplateBinding CaptionHeight}">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Grid Grid.Row="0">
+                                        <StackPanel Margin="0,8,0,0" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top">
+
+                                            <Image Margin="5,0,0,0" x:Name="icon" Source="{TemplateBinding Icon}" VerticalAlignment="Center"   Width="{TemplateBinding Iconsize}" Height="{TemplateBinding Iconsize}" Stretch="Uniform">
+
+                                            </Image>
+                                            <!--#region 窗体标题-->
+                                            <TextBlock VerticalAlignment="Center"  Text="{TemplateBinding Title}" Margin="5,0,0,0"
+                                               Foreground="{TemplateBinding Foreground}" FontSize="{TemplateBinding TitleFontSize}"/>
+                                            <!--#endregion-->
+                                        </StackPanel>
+
+                                        <!--#region 最大化、最小化按钮-->
+                                        <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right"
+                                                VerticalAlignment="Top">
+
+
+                                            <Button x:Name="PART_Btn_Minimized" Style="{StaticResource MinimizedStyle}"
+                                                Height="30" Background="{TemplateBinding Foreground}"
+                                                Visibility="{TemplateBinding MinimizeBox, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                                <Button.ToolTip>
+                                                    <ToolTip Content="最小化"/>
+                                                </Button.ToolTip>
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger EventName="Click">
+                                                        <i:ChangePropertyAction PropertyName="WindowState" Value="Minimized" TargetObject="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"/>
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
+                                            </Button>
+                                            <Grid Visibility="{TemplateBinding MaximizeBox, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                                <Button x:Name="PART_Btn_Maximized" Style="{StaticResource MaximizedStyle}" Height="30"
+                                                     Background="{TemplateBinding Foreground}">
+                                                    <Button.ToolTip>
+                                                        <ToolTip Content="最大化" />
+                                                    </Button.ToolTip>
+                                                    <i:Interaction.Triggers>
+                                                        <i:EventTrigger EventName="Click">
+                                                            <!--<ei:ChangePropertyAction PropertyName="WindowState" Value="Maximized" TargetObject="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"/>-->
+                                                            <i:ChangePropertyAction PropertyName="Visibility" Value="Collapsed" />
+                                                            <i:ChangePropertyAction PropertyName="Visibility" Value="Visible" TargetName="PART_Btn_Restore" />
+                                                        </i:EventTrigger>
+                                                    </i:Interaction.Triggers>
+                                                </Button>
+                                                <Button x:Name="PART_Btn_Restore" Style="{StaticResource RestoreStyle}" Height="30"
+                                                     Background="{TemplateBinding Foreground}"
+                                                    Visibility="{Binding Path=Visibility, ElementName=PART_Btn_Maximized, Converter={StaticResource InverseVisibilityConverter}}">
+                                                    <Button.ToolTip>
+                                                        <ToolTip Content="还原" />
+                                                    </Button.ToolTip>
+                                                    <i:Interaction.Triggers>
+                                                        <i:EventTrigger EventName="Click">
+                                                            <!--<ei:ChangePropertyAction PropertyName="WindowState" Value="Normal" TargetObject="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"/>-->
+                                                            <i:ChangePropertyAction PropertyName="Visibility" Value="Collapsed" />
+                                                            <i:ChangePropertyAction PropertyName="Visibility" Value="Visible" TargetName="PART_Btn_Maximized" />
+                                                        </i:EventTrigger>
+                                                    </i:Interaction.Triggers>
+                                                </Button>
+                                            </Grid>
+                                            <Button x:Name="PART_Btn_Close" Style="{StaticResource CloseStyle}" Height="30"
+                                                 Background="{TemplateBinding Foreground}" Margin="0,0,-1,0"
+                                                Visibility="{TemplateBinding CloseBox, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                                <Button.ToolTip>
+                                                    <ToolTip Content="关闭" />
+                                                </Button.ToolTip>
+                                            </Button>
+                                        </StackPanel>
+                                        <!--#endregion-->
+                                    </Grid>
+                                    <ContentPresenter  Grid.Row="1" Content="{TemplateBinding HeaderContent}"/>
+                                </Grid>
+                                <AdornerDecorator Grid.Row="1">
+                                    <ContentPresenter />
+                                </AdornerDecorator>
+                            </Grid>
+                        </Border>
+
+
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="WindowStates">
+                                <VisualState x:Name="LoadedBounce" Storyboard="{StaticResource LoadedBounce}"/>
+                                <VisualState x:Name="LoadedRotatePositive" Storyboard="{StaticResource LoadedRotatePositive}"/>
+                                <VisualState x:Name="LoadedRotateNegative" Storyboard="{StaticResource LoadedRotateNegative}"/>
+                                <VisualState x:Name="Closing" Storyboard="{StaticResource rotateCloseStoryboard}"/>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Icon" Value="{x:Null}">
+                            <Setter TargetName="icon" Property="Visibility" Value="Collapsed"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+</ResourceDictionary>

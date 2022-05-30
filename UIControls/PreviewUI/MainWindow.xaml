@@ -1,0 +1,37 @@
+﻿<exwin:ExTemplatedMainWindowControl x:Class="PreviewUI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PreviewUI"
+        mc:Ignorable="d"     WindowIcon="{StaticResource KuayueIcon}"
+        Menus="{Binding Menus}" HintMessages="{Binding Messages}"
+        xmlns:exbtns="clr-namespace:ExCommonControlsCore.ExControls.ExButtons;assembly=ExCommonControlsCore"
+        xmlns:exwin="clr-namespace:ExCommonControlsCore.ExControls.ExWindows;assembly=ExCommonControlsCore"
+        Title="MainWindow" Height="700" Width="1000">
+    <exwin:ExTemplatedMainWindowControl.RightShowContent>
+        <TextBlock Text="数据内容展示区" VerticalAlignment="Center" FontSize="22" HorizontalAlignment="Center"/>
+    </exwin:ExTemplatedMainWindowControl.RightShowContent>
+    <exwin:ExTemplatedMainWindowControl.StatusBarContent>
+        <TextBlock Text="状态栏内容展示区" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+    </exwin:ExTemplatedMainWindowControl.StatusBarContent>
+    <Grid>
+        <Grid.Resources>
+            <FontFamily x:Key="FontFamily">pack://application:,,,/ExCommonControlsCore;component/Assets/Fonts/#iconfont</FontFamily>
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Margin="10,0,10,0" Orientation="Horizontal">
+            <exbtns:ExBigIconButton FontFamily="{StaticResource FontFamily}" Margin="5,0,5,0" Content="开启相机" Tag="&#xe60b;"/>
+            <exbtns:ExBigIconButton FontFamily="{StaticResource FontFamily}" Margin="5,0,5,0" Content="停止相机" Tag="&#xeae1;"/>
+            <exbtns:ExBigIconButton FontFamily="{StaticResource FontFamily}" Margin="5,0,5,0" Content="标定" Tag="&#xe68c;"/>
+            <exbtns:ExBigIconButton FontFamily="{StaticResource FontFamily}" Margin="5,0,5,0" Content="拍照" Tag="&#xe793;"/>
+            <exbtns:ExBigIconButton FontFamily="{StaticResource FontFamily}" Width="100" Margin="5,0,5,0" Content="执行一次测量" Tag="&#xe609;"/>
+        </StackPanel>
+        <Border Margin="30" CornerRadius="10" Background="LightGreen" Grid.Row="1">
+            <TextBlock Text="主内容区域" FontSize="44" Foreground="#FFFFFFFF" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Border>
+    </Grid>
+</exwin:ExTemplatedMainWindowControl>
